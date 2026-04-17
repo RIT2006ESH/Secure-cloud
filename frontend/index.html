@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Cloud File Storage System</title>
+  <meta name="description" content="Upload and manage your files securely on AWS S3 with a modern web interface." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☁️</text></svg>" />
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ── Header ──────────────────────────────────── -->
+  <header>
+    <div class="logo-row">
+      <div class="logo-icon">☁️</div>
+      <h1>Secure Cloud Storage</h1>
+    </div>
+    <p>Upload, manage, and delete files stored securely on AWS S3.</p>
+  </header>
+
+  <!-- ── Upload Card ─────────────────────────────── -->
+  <div class="card" id="upload-card">
+    <div class="card-title">
+      Upload a File
+      <span class="badge">AWS S3</span>
+    </div>
+    <p class="card-subtitle">Drop any file below or click to browse. Max size depends on your S3 configuration.</p>
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" aria-label="Select file to upload" />
+      <span class="drop-icon">📂</span>
+      <h3>Drag &amp; drop your file here</h3>
+      <p>or <span>click to browse</span> from your computer</p>
+    </div>
+
+    <!-- Selected File Preview -->
+    <div id="file-preview" aria-live="polite">
+      <div class="file-type-icon" id="preview-icon">📁</div>
+      <div class="file-meta">
+        <div class="file-name" id="preview-name">filename.pdf</div>
+        <div class="file-size" id="preview-size">0 KB</div>
+      </div>
+      <button id="remove-file" title="Remove selected file" aria-label="Remove selected file">✕</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-wrap" aria-live="polite">
+      <div class="progress-label">
+        <span>Uploading to S3…</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Upload Button -->
+    <button id="upload-btn" aria-label="Upload file to AWS S3">
+      ☁️ Upload to S3
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast" role="alert" aria-live="assertive">
+      <span class="toast-icon" id="toast-icon">✅</span>
+      <div class="toast-body">
+        <div class="toast-title" id="toast-title"></div>
+        <div class="toast-msg" id="toast-msg"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Divider ──────────────────────────────────── -->
+  <div class="divider"></div>
+
+  <!-- ── Files List ───────────────────────────────── -->
+  <section aria-label="Uploaded files">
+    <div class="section-header">
+      <h2 class="section-title">📂 Stored Files</h2>
+      <button id="refresh-btn" aria-label="Refresh file list">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        Refresh
+      </button>
+    </div>
+
+    <ul id="files-list" aria-label="Files stored in S3">
+      <li class="empty-state">
+        <div class="empty-icon">⏳</div>
+        Loading files…
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── Footer ───────────────────────────────────── -->
+  <footer>
+    <p>Secure Cloud File Storage System &mdash; powered by
+      <a href="https://fastapi.tiangolo.com" target="_blank" rel="noopener">FastAPI</a> &amp;
+      <a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener">AWS S3</a>
+    </p>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
